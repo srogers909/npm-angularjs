@@ -24,11 +24,15 @@
     "onchange": "^3.2.1",
     "tslint": "^5.8.0",
     "typescript": "^2.5.3",
-    "uglify-js": "3"
+    "uglify-js": "3",
+    "usemin-cli": "^0.5.1"
   },
   "scripts": {
+    "less": "lessc src/less/master.less src/less/master.css",
+    "usemin": "usemin src/index.html -d dist -o dist/index.html",
     "test": "jasmine-node tests/",
-    "build": "tsc && uglifyjs src/ -c -m -- dist/master.js > dist/master.min.js",
-    "serve": "http-server ./src -p 8080 -o"
+    "build": "tsc && npm test && npm run less && npm run usemin",
+    "serve:dev": "http-server ./src -p 8080 -o",
+    "serve:dist": "http-server ./dist -p 8081 -o"
   }
 }
